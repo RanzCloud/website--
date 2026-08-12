@@ -1,0 +1,1 @@
+import {Router} from "express"; import auth from "../middleware/auth"; import admin from "../middleware/admin"; import {AdminController} from "../controllers/admin.controller"; const r=Router();r.get("/admin/dashboard",auth,admin,AdminController.dashboard);export default r;
