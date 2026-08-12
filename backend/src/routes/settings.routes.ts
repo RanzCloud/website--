@@ -1,0 +1,1 @@
+import {Router} from "express"; import auth from "../middleware/auth"; import admin from "../middleware/admin"; import {SettingsController} from "../controllers/settings.controller"; const r=Router();r.get("/admin/settings",auth,admin,SettingsController.list);r.post("/admin/settings",auth,admin,SettingsController.save);export default r;
