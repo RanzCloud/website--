@@ -13,3 +13,77 @@ model Admin {
   password  String
   createdAt DateTime @default(now())
 }
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  username  String   @unique
+  password  String
+  createdAt DateTime @default(now())
+
+  orders Order[]
+}
+
+model Product {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  price       Int
+  ram         Int      @default(1024)
+  disk        Int      @default(10240)
+  cpu         Int      @default(100)
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  orders Order[]
+}
+
+model Setting {
+  id        String   @id @default(uuid())
+  key       String   @unique
+  value     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Order {
+  id                String   @id @default(uuid())
+  invoice           String   @unique
+  userId            String?
+  productId         String
+  email             String
+  username          String
+  passwordHash      String
+  encryptedPassword String
+  serverName        String
+
+  amount            Int
+  depositId         String?  @unique
+  paymentReference  String?
+  paymentStatus     String   @default("PENDING")
+
+  provisioned       Boolean  @default(false)
+
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  user    User?    @relation(fields: [userId], references: [id])
+  product Product  @relation(fields: [productId], references: [id])
+  server  Server?
+}
+
+model Server {
+  id           String   @id @default(uuid())
+  orderId      String   @unique
+  pteroUserId  Int
+  pteroServerId Int
+  username     String
+  serverName   String
+  panelUrl     String
+
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  order Order @relation(fields: [orderId], references: [id], onDelete: Cascade)
+}
