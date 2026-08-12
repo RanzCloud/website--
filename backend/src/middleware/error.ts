@@ -1,0 +1,1 @@
+import {Request,Response,NextFunction} from "express"; export const notFound=(_q:Request,r:Response)=>r.status(404).json({success:false,message:"Not found"}); export const errorHandler=(e:unknown,_q:Request,r:Response,_n:NextFunction)=>{console.error(e);r.status(500).json({success:false,message:"Internal server error"})};
