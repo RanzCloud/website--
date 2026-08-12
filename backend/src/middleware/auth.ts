@@ -1,0 +1,2 @@
+import {Request,Response,NextFunction} from "express"; import {verifyToken} from "../utils/jwt";
+export default function auth(req:Request,res:Response,next:NextFunction){const h=req.headers.authorization;if(!h?.startsWith("Bearer "))return res.status(401).json({success:false,message:"Unauthorized"});try{req.user=verifyToken(h.slice(7));next()}catch{return res.status(401).json({success:false,message:"Invalid token"})}}
