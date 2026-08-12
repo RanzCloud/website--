@@ -1,0 +1,2 @@
+import {Request,Response} from "express"; import prisma from "../config/prisma";
+export class AdminController{static async dashboard(_q:Request,r:Response){const [users,products,orders,paid,revenue]=await Promise.all([prisma.user.count(),prisma.product.count(),prisma.order.count(),prisma.order.count({where:{paymentStatus:"PAID"}}),prisma.order.aggregate({where:{paymentStatus:"PAID"},_sum:{amount:true}})]);r.json({success:true,data:{users,products,orders,paid,revenue:revenue._sum.amount??0}})}}
