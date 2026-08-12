@@ -1,0 +1,1 @@
+import {Router} from "express"; import auth from "../middleware/auth"; import admin from "../middleware/admin"; import {ProvisionController} from "../controllers/provision.controller"; const r=Router();r.post("/admin/orders/:invoice/provision",auth,admin,ProvisionController.retry);export default r;
