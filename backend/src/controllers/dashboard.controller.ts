@@ -1,0 +1,2 @@
+import {Request,Response} from "express"; import prisma from "../config/prisma";
+export class DashboardController{static async myServers(q:Request,r:Response){r.json({success:true,data:await prisma.server.findMany({where:{order:{userId:q.user?.id}},orderBy:{createdAt:"desc"}})})}}
