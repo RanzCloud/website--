@@ -1,0 +1,1 @@
+import {Router} from "express"; import auth from "../middleware/auth"; import {CheckoutController} from "../controllers/checkout.controller"; const r=Router();r.post("/checkout",auth,CheckoutController.create);export default r;
