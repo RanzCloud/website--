@@ -1,0 +1,1 @@
+@import "tailwindcss"; :root{--bg:#050510}*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 10% 10%,#00e5ff20,transparent 30%),radial-gradient(circle at 90% 80%,#8b5cf620,transparent 35%),var(--bg);color:#fff;min-height:100vh}.glass{background:#0b1020bb;border:1px solid #ffffff12;backdrop-filter:blur(18px)}.neon{box-shadow:0 0 30px #00e5ff20}
