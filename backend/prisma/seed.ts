@@ -1,0 +1,2 @@
+import bcrypt from "bcryptjs"; import prisma from "../src/config/prisma";
+async function main(){const email=process.env.ADMIN_EMAIL!,password=process.env.ADMIN_PASSWORD!;if(!email||!password)throw new Error("ADMIN credentials required");await prisma.admin.upsert({where:{email},update:{password:await bcrypt.hash(password,12)},create:{email,password:await bcrypt.hash(password,12)}})} main().finally(()=>prisma.$disconnect());
