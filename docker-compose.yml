@@ -15,14 +15,14 @@ services:
       JWT_SECRET: change-this
       ADMIN_EMAIL: admin@ranzpanel.com
       ADMIN_PASSWORD: change-this
-      FRONTEND_URL: http://localhost:3001
+      FRONTEND_URL: https://ranzpanel.up.railway.app
       APP_ENCRYPTION_KEY: change-this-encryption-secret
     depends_on: [db]
     ports: ["3000:3000"]
   frontend:
     build: ./frontend
     environment:
-      NEXT_PUBLIC_API_URL: http://localhost:3000/api
+      NEXT_PUBLIC_API_URL: https://ranzpanel.up.railway.app/api
     depends_on: [backend]
     ports: ["3001:3001"]
 volumes:
